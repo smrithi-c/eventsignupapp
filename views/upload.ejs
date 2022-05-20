@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/head %>
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#submitBtn').click(() => {
+            if ($('input[name="collectionName"]:checked').val()) {
+                $('#uploadForm').submit();
+            } else {
+                alert("Please select the option of which file you are uploading.");
+            }
+        });
+    });
+</script>
+
+<body>
+    <% include partials/header %>
+    <div class="container animated fadeIn mt-4">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>Upload</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact">
+                            <form ref='uploadForm' id='uploadForm' action='/upload' method='post'
+                                encType="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Choose the type of file you are uploading:</label>
+                                    <div>
+                                        <input type="radio" name="collectionName" value="students"> Students
+                                        <input class="ml-4" type="radio" name="collectionName" value="obligations">
+                                        Obligations
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" accept=".csv" id="csvFile" name="csvFile">
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-lg btn-warning" type="button" id="submitBtn">Submit</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="md-col-3"></div>
+        </div>
+    </div>
+    <% include partials/validateLogin %>
+</body>
+
+</html>

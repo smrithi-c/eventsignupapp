@@ -1,0 +1,111 @@
+*{
+	box-sizing: border-box;
+}
+body{
+	background: RGB(38,38,38);
+	color: #485e74;
+	line-height: 1.6;
+	font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 1em;
+	font-size: 16px;
+}
+a {
+	text-decoration: none !important;
+	color: #000;
+}
+
+h1.brand a {
+	color: #fff;
+	font-size: 45px;
+}
+.container{
+	max-width: 1170px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1em;
+}
+ul{
+	list-style: none;
+	padding: 0;
+}
+.brand{
+	text-align: center;
+	font-weight: bold;
+}
+.brand span{
+	color: white;
+}
+.brand span span{
+	color: #a54df2;
+}
+.wrapper{
+	box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7)
+}
+.wrapper > *{
+	padding: 1em;
+}
+.company-info{
+	background: rgb(254, 212, 54);
+}
+.company-info h3, .company-info ul{
+	text-align: center;
+	margin:0 0 1rem 0;
+}
+.contact{
+	background: #f9feff;
+}
+#logo-wrapper {
+	text-align: center;
+	margin-bottom: 20px;
+}
+#logo {
+	width: 180px;
+}
+.success{
+	background: #79c879;
+}
+.box-wrapper {
+	margin-top: 25px;
+}
+.box {
+	margin: 10px;
+	padding: 4px;
+	border: solid 1px rgb(217, 182, 58);
+	background-color: rgb(254, 212, 54);
+	width: 150px;
+	text-align: center;
+	float: left;
+	border-radius: 8px;
+}
+.help-icon a {
+	color: rgb(254, 212, 54);
+}
+.icon {
+	color: #000;
+}
+.icon-text {
+	margin-top: 7px;
+}
+.card {
+	border: rgb(217, 182, 58);
+}
+.card-header {
+	background-color: rgb(254, 212, 54);
+}
+#firstButton {
+	background-color: rgb(254, 212, 54);
+	border: rgb(217, 182, 58);
+}
+/*Large Screens*/
+@media(min-width: 700px){
+	.wrapper{
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+	}
+	.wrapper > *{
+			padding: 2em;
+	}
+	.company-info h3, .company-info ul, .brand{
+			text-align: left;
+	}
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+<head>
+  <% include partials/head %>
+  <script>
+    function downloadCSV(csv, filename) {
+      var csvFile;
+      var downloadLink;
+ 
+      // CSV file
+      csvFile = new Blob([csv], { type: "text/csv" });
+ 
+      // Download link
+      downloadLink = document.createElement("a");
+ 
+      // File name
+      downloadLink.download = filename;
+ 
+      // Create a link to the file
+      downloadLink.href = window.URL.createObjectURL(csvFile);
+ 
+      // Hide download link
+      downloadLink.style.display = "none";
+ 
+      // Add the link to DOM
+      document.body.appendChild(downloadLink);
+ 
+      // Click download link
+      downloadLink.click();
+    }
+ 
+    //Export HTML Table to .csv File
+    function exportTableToCSV(filename) {
+      var csv = [];
+      var rows = document.querySelectorAll("table tr");
+ 
+      for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+ 
+        for (var j = 0; j < cols.length; j++)
+          row.push(cols[j].innerText);
+ 
+        csv.push(row.join(","));
+      }
+ 
+      // Download CSV file
+      downloadCSV(csv.join("\n"), filename);
+    }
+  </script>
+</head>
+ 
+<body>
+  <% include partials/header %>
+  <div class="container mt-4 animated fadeIn">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+            <div class="float-right">
+                <button class="btn btn-md btn-primary text-center" onclick="exportTableToCSV('tickets.csv')"><i
+                    class="fa fa-cloud-download-alt"></i> Export Data</button>
+              </div>
+            <div class="float-right" style="padding-right: 20px;">
+                <p id="total">Total Tickets: </p>
+            </div>
+          <h5>Tickets</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <table id="data" class="table table-striped">
+          <tr>
+            <th>Ticket #</th>
+            <th>Student ID</th>
+            <th>First Name</th>
+            <th>Middle Initial</th>
+            <th>Last Name</th>
+            <th>Grade</th>
+            <!--<th>Guest?</th>-->
+            <th>Guest Ticket #</th>
+          </tr>
+          <% console.log(studentsData) %>
+          <% studentsData.forEach(dt=>{ %>
+          <tr>
+            <td><%= dt.ticket %></td>
+            <td><%= dt.sID %></td>
+            <td><%= dt.first %></td>
+            <td><%= dt.middle %></td>
+            <td><%= dt.last %></td>
+            <td><%= dt.grade %></td>
+            <!--<td><%= dt.guestBool %></td>-->
+            <td><%= dt.guest %></td>
+          </tr>
+          <% }) %>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+ 
+<script>
+    var text = document.getElementById("total");
+    var num = $('#data tr').length-1;
+    console.log(num);
+    text.firstChild.nodeValue = ("Total Tickets: " + num);
+</script>

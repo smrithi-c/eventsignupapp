@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+    <div class="container animated fadeIn">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>Upload Files</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert <%= styleClass %>" role="alert"><%= msg %></div>
+                        <div class="text-center">
+                            <a class="float-left btn btn-lg btn-secondary" href="/upload"><i class="fa fa-chevron-left"></i> Back</a>
+                            <% if(status == 'success') { %>
+                                <a class="btn btn-lg btn-success" href="/index">Home</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <!--
+    <div class="container">
+        <h1 class="brand"><span>S<span>R</span>SS</span>CSV Entry</h1>
+        <div class="wrapper animated fadeIn">
+            <div class="contact">
+                <div class="<%= styleClass %>"><%= msg %></div>
+                <div class="text-center">
+                    <a href="/index" class="btn btn-secondary">Home</a>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <% include partials/validateLogin %>
+</body>
+
+</html>

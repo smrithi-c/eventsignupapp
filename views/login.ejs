@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <% include partials/head %>
+
+    <style>
+        .container {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container  animated fadeIn">
+        <div class="title float-left">
+            <h1 class="brand"><a href="/index">Poolesville Event Sign Up</a></h1>
+        </div>
+        <div class="help-icon float-right">
+            <a href="/help"><i class="fa fa-question-circle fa-3x"></i></a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="wrapper">
+            <div class="company-info">
+                <div id="logo-wrapper">
+                    <img src="/images/PoolesvilleLogo.png" alt="Logo" id="logo">
+                </div>
+            </div>
+            <div class="contact">
+                <div class="box-wrapper">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" type="text" id="username" size="6">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" type="password" id="password" size="6">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-md btn-success" type="button" id="loginBtn">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#loginBtn').on('click', function () {
+                if (!$('#username').val()) {
+                    alert('Please enter the username')
+                    return
+                }
+                if (!$('#password').val()) {
+                    alert('Please enter the password')
+                    return
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/login',
+                    data: {
+                        username: $('#username').val(), 
+                        password: $('#password').val()
+                    },
+                    success: function(data) {
+                        if(data.auth == true) {
+                            window.sessionStorage.token = data.token
+                            window.location.replace('/index')
+                        } else {
+                            alert('Log in failed')
+                        }
+                    },
+                    error: function(xhr, status, error, responseText) {
+                        if(error == "Unauthorized") {
+                            alert('Invalid username or password')
+                        } else {
+                            alert('Failed to validate user')
+                        }
+                    },
+                    dataType: 'json'
+                });
+            })
+        })
+    </script>
+</body>
+
+</html>
